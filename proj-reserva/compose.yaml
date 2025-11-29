@@ -1,0 +1,22 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+services:
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+      DB_HOST: edumysql.acesso.rj.senac.br
+      DB_USER: 20252_prjint5
+      DB_PASSWORD: Senac@2025
+      DB_NAME: 20252_prjint5_pedrocarvalho
+      DB_PORT: 3306
+      DB_CONNECTION_LIMIT: 10
+      DB_QUEUE_LIMIT: 0
+      DB_WAIT_FOR_CONNECTIONS: true
+      DEFAULT_RESERVATION_STATUS: Pendente
+    ports:
+      - 3002:3002

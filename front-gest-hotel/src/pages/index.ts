@@ -1,0 +1,12 @@
+export { HomePage } from "./home/HomePage";
+export { RoomsPage } from "./rooms/RoomsPage";
+export { RoomDetailsPage } from "./rooms/RoomDetailsPage";
+export { ServicesPage } from "./services/ServicesPage";
+export { ServiceDetailsPage } from "./services/ServiceDetailsPage";
+export { AttractionsPage } from "./attractions/AttractionsPage";
+export { AttractionDetailsPage } from "./attractions/AttractionDetailsPage";
+export { AuthPages } from "./auth/AuthPages";
+export { PaymentPage } from "./payment/PaymentPage";
+export { UserProfilePage } from "./user/UserProfilePage";
+export { MyReservationsPage } from "./user/MyReservationsPage";
+export { MyTravelsPage } from "./user/MyTravelsPage";
