@@ -36,8 +36,8 @@ export function SearchForm({ onSearch }: SearchFormProps) {
       return;
     }
 
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
+    const checkInDate = new Date(checkIn + "T00:00:00");
+    const checkOutDate = new Date(checkOut + "T00:00:00");
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -55,12 +55,16 @@ export function SearchForm({ onSearch }: SearchFormProps) {
   };
 
   const today = new Date();
-  const minDate = today.toISOString().split("T")[0];
+  const minDate = today.toLocaleDateString("en-CA", { // "en-CA" força YYYY-MM-DD
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 
   const minCheckOut = checkIn
-    ? new Date(new Date(checkIn).getTime() + 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split("T")[0]
+    ? new Date(new Date(checkIn + "T00:00:00").getTime() + 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0]
     : minDate;
 
   return (

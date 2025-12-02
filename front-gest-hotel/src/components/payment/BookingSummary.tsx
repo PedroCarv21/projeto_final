@@ -35,7 +35,7 @@ export function BookingSummary({
   total
 }: BookingSummaryProps) {
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('pt-BR');
+    return new Date(dateStr + "T00:00:00").toLocaleDateString('pt-BR');
   };
 
   return (
