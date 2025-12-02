@@ -38,6 +38,29 @@ export function PaymentPage({ onNavigate, bookingData }: PaymentPageProps) {
     cvv: "",
   });
 
+
+  // 1. NOVO BLOCO: Lógica para carregar datas e hóspedes do sessionStorage (hotelSearch)
+  const getSessionSearchData = () => {
+    try {
+      const searchDataString = sessionStorage.getItem("hotelSearch");
+      if (searchDataString) {
+        const searchData = JSON.parse(searchDataString);
+        return {
+          // As chaves no sessionStorage estão em camelCase, como na sua imagem
+          checkIn: searchData.checkIn || "",
+          checkOut: searchData.checkOut || "",
+          totalGuests: parseInt(searchData.guests) || 2,
+        };
+      }
+    } catch (error) {
+      console.error("Erro ao carregar ou parsear hotelSearch do sessionStorage:", error);
+    }
+    // Retorna valores padrão (fallback) se não encontrar ou em caso de erro
+    return { checkIn: "", checkOut: "", totalGuests: 2 };
+  };
+
+  const sessionSearchData = getSessionSearchData();
+
   const [guestData, setGuestData] = useState({
     totalGuests: bookingData?.guests || 2,
     firstName: "",
@@ -47,8 +70,9 @@ export function PaymentPage({ onNavigate, bookingData }: PaymentPageProps) {
     cpf: "",
     birthday: "",
     isMainGuest: "main",
-    checkIn: bookingData?.dates?.checkIn || "",
-    checkOut: bookingData?.dates?.checkOut || "",
+    // Prioriza bookingData.dates, se não existir, usa as datas do sessionStorage
+    checkIn: bookingData?.dates?.checkIn || sessionSearchData.checkIn,
+    checkOut: bookingData?.dates?.checkOut || sessionSearchData.checkOut,
   });
 
   const [selectedServices, setSelectedServices] = useState<number[]>([]);
